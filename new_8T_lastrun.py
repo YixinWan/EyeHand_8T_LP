@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on 一月 27, 2024, at 10:07
+    on 一月 27, 2024, at 14:46
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -403,15 +403,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "instruction_baseline" ---
     instruction_baseline_text = visual.TextStim(win=win, name='instruction_baseline_text',
-        text='The green cursor represents the position of your hand movement.\n\nYou must start from the starting point in the center of the screen and move towards to hit the black target point that appears.\n\nYou should move in a straight line as fast and accurately as you can towards the target.\n\nOnce you hit the target, return to the starting point and wait for the next target to appear.\n\nClick anywhere to continue...',
+        text='The green cursor represents the position of your hand movement.\n\nYou must start from the starting point in the center of the screen and move towards to hit the black target point that appears.\n\nYou should move in a straight line as fast and accurately as you can towards the target.\n\nOnce you hit the target, return to the starting point and wait for the next target to appear.\n\nPress [space] to continue...',
         font='Open Sans',
         pos=(0, 0), height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=1.0, 
         languageStyle='LTR',
         depth=0.0);
-    instruction_baseline_mouse = event.Mouse(win=win)
-    x, y = [None, None]
-    instruction_baseline_mouse.mouseClock = core.Clock()
+    instruction_baseline_key = keyboard.Keyboard()
     
     # --- Initialize components for Routine "baseline" ---
     # Run 'Begin Experiment' code from code_baseline
@@ -433,7 +431,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     group = expInfo['group']
     if group == '0':
         feedback_delay = 0.01
-        blank_screen = 1.5
+        blank_screen = 1.49
     elif group == '1':
         feedback_delay = 1.2
         blank_screen = 0.3
@@ -477,15 +475,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "instruction_rotation" ---
     instruction_rotation_text = visual.TextStim(win=win, name='instruction_rotation_text',
-        text='Brief Rest Period\n\nIn the next trials, the green cursor still represents your hand movements, but it will appear on the screen with some deviation.\n\nAs before, you must try to hit the black target point with the green cursor. \n\n\nClick anywhere to continue the experiment...\n',
+        text='Brief Rest Period\n\nIn the next trials, the green cursor still represents your hand movements, but it will appear on the screen with some deviation.\n\nAs before, you must try to hit the black target point with the green cursor. \n\n\nPress [space] to continue...',
         font='Open Sans',
         pos=(0, 0), height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    instruction_rotation_mouse = event.Mouse(win=win)
-    x, y = [None, None]
-    instruction_rotation_mouse.mouseClock = core.Clock()
+    instruction_rotation_key = keyboard.Keyboard()
     
     # --- Initialize components for Routine "rotation" ---
     mouse_rotation = event.Mouse(win=win)
@@ -524,7 +520,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "instruction_aftereffect" ---
     instruction_aftereffect_text = visual.TextStim(win=win, name='instruction_aftereffect_text',
-        text='End of Cursor Movement Phase\n\n\nYou need to move to target points directly with your hand, without using any strategy.\n\nHowever, there will be no cursor to indicate the position of your hand movement in the next trials.\n\nClick anywhere to continue the experiment...\n',
+        text='End of Cursor Movement Phase\n\n\nYou need to move to target points directly with your hand, without using any strategy.\n\nHowever, there will be no cursor to indicate the position of your hand movement in the next trials.\n\nPress [space] to continue...\n',
         font='Open Sans',
         pos=(0, 0), height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -533,6 +529,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     instruction_aftereffect_mouse = event.Mouse(win=win)
     x, y = [None, None]
     instruction_aftereffect_mouse.mouseClock = core.Clock()
+    instruction_aftereffect_key = keyboard.Keyboard()
     
     # --- Initialize components for Routine "aftereffect" ---
     mouse_aftereffect = event.Mouse(win=win)
@@ -739,10 +736,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('instruction_baseline.started', globalClock.getTime())
-    # setup some python lists for storing info about the instruction_baseline_mouse
-    gotValidClick = False  # until a click is received
+    instruction_baseline_key.keys = []
+    instruction_baseline_key.rt = []
+    _instruction_baseline_key_allKeys = []
     # keep track of which components have finished
-    instruction_baselineComponents = [instruction_baseline_text, instruction_baseline_mouse]
+    instruction_baselineComponents = [instruction_baseline_text, instruction_baseline_key]
     for thisComponent in instruction_baselineComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -782,24 +780,35 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if instruction_baseline_text.status == STARTED:
             # update params
             pass
-        # *instruction_baseline_mouse* updates
         
-        # if instruction_baseline_mouse is starting this frame...
-        if instruction_baseline_mouse.status == NOT_STARTED and t >= 0.0-frameTolerance:
+        # *instruction_baseline_key* updates
+        waitOnFlip = False
+        
+        # if instruction_baseline_key is starting this frame...
+        if instruction_baseline_key.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            instruction_baseline_mouse.frameNStart = frameN  # exact frame index
-            instruction_baseline_mouse.tStart = t  # local t and not account for scr refresh
-            instruction_baseline_mouse.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(instruction_baseline_mouse, 'tStartRefresh')  # time at next scr refresh
+            instruction_baseline_key.frameNStart = frameN  # exact frame index
+            instruction_baseline_key.tStart = t  # local t and not account for scr refresh
+            instruction_baseline_key.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(instruction_baseline_key, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'instruction_baseline_key.started')
             # update status
-            instruction_baseline_mouse.status = STARTED
-            prevButtonState = instruction_baseline_mouse.getPressed()  # if button is down already this ISN'T a new click
-        if instruction_baseline_mouse.status == STARTED:  # only update if started and not finished!
-            buttons = instruction_baseline_mouse.getPressed()
-            if buttons != prevButtonState:  # button state changed?
-                prevButtonState = buttons
-                if sum(buttons) > 0:  # state changed to a new click
-                    continueRoutine = False  # end routine on response        
+            instruction_baseline_key.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(instruction_baseline_key.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(instruction_baseline_key.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if instruction_baseline_key.status == STARTED and not waitOnFlip:
+            theseKeys = instruction_baseline_key.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            _instruction_baseline_key_allKeys.extend(theseKeys)
+            if len(_instruction_baseline_key_allKeys):
+                instruction_baseline_key.keys = _instruction_baseline_key_allKeys[-1].name  # just the last key pressed
+                instruction_baseline_key.rt = _instruction_baseline_key_allKeys[-1].rt
+                instruction_baseline_key.duration = _instruction_baseline_key_allKeys[-1].duration
+                # a response ends the routine
+                continueRoutine = False
+        
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
             thisExp.status = FINISHED
@@ -826,7 +835,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('instruction_baseline.stopped', globalClock.getTime())
-    # store data for thisExp (ExperimentHandler)
+    # check responses
+    if instruction_baseline_key.keys in ['', [], None]:  # No response was made
+        instruction_baseline_key.keys = None
+    thisExp.addData('instruction_baseline_key.keys',instruction_baseline_key.keys)
+    if instruction_baseline_key.keys != None:  # we had a response
+        thisExp.addData('instruction_baseline_key.rt', instruction_baseline_key.rt)
+        thisExp.addData('instruction_baseline_key.duration', instruction_baseline_key.duration)
     thisExp.nextEntry()
     # the Routine "instruction_baseline" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
@@ -834,7 +849,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     baseline_trials = data.TrialHandler(nReps=1.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('conditions_baseline1.xlsx'),
+        trialList=data.importConditions('conditions_baseline.xlsx'),
         seed=None, name='baseline_trials')
     thisExp.addLoop(baseline_trials)  # add the loop to the experiment
     thisBaseline_trial = baseline_trials.trialList[0]  # so we can initialise stimuli with some values
@@ -1241,10 +1256,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         thisExp.addData('instruction_rotation.started', globalClock.getTime())
-        # setup some python lists for storing info about the instruction_rotation_mouse
-        gotValidClick = False  # until a click is received
+        instruction_rotation_key.keys = []
+        instruction_rotation_key.rt = []
+        _instruction_rotation_key_allKeys = []
         # keep track of which components have finished
-        instruction_rotationComponents = [instruction_rotation_text, instruction_rotation_mouse]
+        instruction_rotationComponents = [instruction_rotation_text, instruction_rotation_key]
         for thisComponent in instruction_rotationComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -1284,25 +1300,35 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if instruction_rotation_text.status == STARTED:
                 # update params
                 pass
-            # *instruction_rotation_mouse* updates
             
-            # if instruction_rotation_mouse is starting this frame...
-            if instruction_rotation_mouse.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # *instruction_rotation_key* updates
+            waitOnFlip = False
+            
+            # if instruction_rotation_key is starting this frame...
+            if instruction_rotation_key.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                instruction_rotation_mouse.frameNStart = frameN  # exact frame index
-                instruction_rotation_mouse.tStart = t  # local t and not account for scr refresh
-                instruction_rotation_mouse.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(instruction_rotation_mouse, 'tStartRefresh')  # time at next scr refresh
+                instruction_rotation_key.frameNStart = frameN  # exact frame index
+                instruction_rotation_key.tStart = t  # local t and not account for scr refresh
+                instruction_rotation_key.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(instruction_rotation_key, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'instruction_rotation_key.started')
                 # update status
-                instruction_rotation_mouse.status = STARTED
-                instruction_rotation_mouse.mouseClock.reset()
-                prevButtonState = [0, 0, 0]  # if now button is down we will treat as 'new' click
-            if instruction_rotation_mouse.status == STARTED:  # only update if started and not finished!
-                buttons = instruction_rotation_mouse.getPressed()
-                if buttons != prevButtonState:  # button state changed?
-                    prevButtonState = buttons
-                    if sum(buttons) > 0:  # state changed to a new click
-                        continueRoutine = False  # end routine on response            
+                instruction_rotation_key.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(instruction_rotation_key.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(instruction_rotation_key.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if instruction_rotation_key.status == STARTED and not waitOnFlip:
+                theseKeys = instruction_rotation_key.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+                _instruction_rotation_key_allKeys.extend(theseKeys)
+                if len(_instruction_rotation_key_allKeys):
+                    instruction_rotation_key.keys = _instruction_rotation_key_allKeys[-1].name  # just the last key pressed
+                    instruction_rotation_key.rt = _instruction_rotation_key_allKeys[-1].rt
+                    instruction_rotation_key.duration = _instruction_rotation_key_allKeys[-1].duration
+                    # a response ends the routine
+                    continueRoutine = False
+            
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
                 thisExp.status = FINISHED
@@ -1329,14 +1355,20 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
         thisExp.addData('instruction_rotation.stopped', globalClock.getTime())
-        # store data for break_trials (TrialHandler)
+        # check responses
+        if instruction_rotation_key.keys in ['', [], None]:  # No response was made
+            instruction_rotation_key.keys = None
+        break_trials.addData('instruction_rotation_key.keys',instruction_rotation_key.keys)
+        if instruction_rotation_key.keys != None:  # we had a response
+            break_trials.addData('instruction_rotation_key.rt', instruction_rotation_key.rt)
+            break_trials.addData('instruction_rotation_key.duration', instruction_rotation_key.duration)
         # the Routine "instruction_rotation" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
         # set up handler to look after randomisation of conditions etc
         rotation_trials = data.TrialHandler(nReps=1.0, method='sequential', 
             extraInfo=expInfo, originPath=-1,
-            trialList=data.importConditions('conditions_rotation1.xlsx'),
+            trialList=data.importConditions('conditions_rotation.xlsx'),
             seed=None, name='rotation_trials')
         thisExp.addLoop(rotation_trials)  # add the loop to the experiment
         thisRotation_trial = rotation_trials.trialList[0]  # so we can initialise stimuli with some values
@@ -1717,8 +1749,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # setup some python lists for storing info about the instruction_aftereffect_mouse
     gotValidClick = False  # until a click is received
     instruction_aftereffect_mouse.mouseClock.reset()
+    instruction_aftereffect_key.keys = []
+    instruction_aftereffect_key.rt = []
+    _instruction_aftereffect_key_allKeys = []
     # keep track of which components have finished
-    instruction_aftereffectComponents = [instruction_aftereffect_text, instruction_aftereffect_mouse]
+    instruction_aftereffectComponents = [instruction_aftereffect_text, instruction_aftereffect_mouse, instruction_aftereffect_key]
     for thisComponent in instruction_aftereffectComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -1776,6 +1811,34 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 prevButtonState = buttons
                 if sum(buttons) > 0:  # state changed to a new click
                     continueRoutine = False  # end routine on response        
+        # *instruction_aftereffect_key* updates
+        waitOnFlip = False
+        
+        # if instruction_aftereffect_key is starting this frame...
+        if instruction_aftereffect_key.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            instruction_aftereffect_key.frameNStart = frameN  # exact frame index
+            instruction_aftereffect_key.tStart = t  # local t and not account for scr refresh
+            instruction_aftereffect_key.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(instruction_aftereffect_key, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'instruction_aftereffect_key.started')
+            # update status
+            instruction_aftereffect_key.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(instruction_aftereffect_key.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(instruction_aftereffect_key.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if instruction_aftereffect_key.status == STARTED and not waitOnFlip:
+            theseKeys = instruction_aftereffect_key.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            _instruction_aftereffect_key_allKeys.extend(theseKeys)
+            if len(_instruction_aftereffect_key_allKeys):
+                instruction_aftereffect_key.keys = _instruction_aftereffect_key_allKeys[-1].name  # just the last key pressed
+                instruction_aftereffect_key.rt = _instruction_aftereffect_key_allKeys[-1].rt
+                instruction_aftereffect_key.duration = _instruction_aftereffect_key_allKeys[-1].duration
+                # a response ends the routine
+                continueRoutine = False
+        
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
             thisExp.status = FINISHED
@@ -1804,13 +1867,21 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     thisExp.addData('instruction_aftereffect.stopped', globalClock.getTime())
     # store data for thisExp (ExperimentHandler)
     thisExp.nextEntry()
+    # check responses
+    if instruction_aftereffect_key.keys in ['', [], None]:  # No response was made
+        instruction_aftereffect_key.keys = None
+    thisExp.addData('instruction_aftereffect_key.keys',instruction_aftereffect_key.keys)
+    if instruction_aftereffect_key.keys != None:  # we had a response
+        thisExp.addData('instruction_aftereffect_key.rt', instruction_aftereffect_key.rt)
+        thisExp.addData('instruction_aftereffect_key.duration', instruction_aftereffect_key.duration)
+    thisExp.nextEntry()
     # the Routine "instruction_aftereffect" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
     aftereffect_trials = data.TrialHandler(nReps=1.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('conditions_aftereffect1.xlsx'),
+        trialList=data.importConditions('conditions_aftereffect.xlsx'),
         seed=None, name='aftereffect_trials')
     thisExp.addLoop(aftereffect_trials)  # add the loop to the experiment
     thisAftereffect_trial = aftereffect_trials.trialList[0]  # so we can initialise stimuli with some values
